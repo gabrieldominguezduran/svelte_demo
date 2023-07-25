@@ -2,6 +2,10 @@
   let name = "Gabo";
   let age = 48;
 
+  $: if (name === "Gabo") {
+    name = `${name.toUpperCase()}!`;
+  }
+
   function incrementAge() {
     age++;
   }
@@ -15,19 +19,30 @@
   }
 </script>
 
-<h1>Hello, my name is {name} and I'm {age} years old!</h1>
-<button on:click={incrementAge}>Increment age</button>
-<button on:click={decrementAge}>Decrement age</button>
-<input type="text" placeholder="Change name" on:input={handleNameChange} />
+<main>
+  <h1>Hello, my name is {name} and I'm {age} years old!</h1>
+  <input type="text" placeholder="Change name" on:input={handleNameChange} />
+  <button on:click={incrementAge}>Increment age</button>
+  <button on:click={decrementAge}>Decrement age</button>
+</main>
 
 <style>
+  main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 95dvh;
+    border: 5px solid crimson;
+  }
   h1 {
-    color: purple;
-    margin: 1rem 0.7rem;
+    color: crimson;
+    margin: 0 auto;
+    text-align: center;
   }
 
   button {
-    background-color: purple;
+    background-color: crimson;
     color: white;
     border: none;
     padding: 10px 20px;
@@ -39,7 +54,7 @@
   input {
     padding: 10px;
     border-radius: 5px;
-    border: 1px solid purple;
+    border: 1px solid crimson;
     margin: 10px;
   }
 </style>
