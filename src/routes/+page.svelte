@@ -2,9 +2,9 @@
   let name = "Gabo";
   let age = 48;
 
-  $: if (name === "Gabo") {
-    name = `${name.toUpperCase()}!`;
-  }
+  const capitalizeName = (string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  };
 
   function incrementAge() {
     age++;
@@ -15,12 +15,14 @@
   }
 
   function handleNameChange(event) {
-    name = event.target.value;
+    name = capitalizeName(event.target.value);
   }
 </script>
 
 <main>
-  <h1>Hello, my name is {name} and I'm {age} years old!</h1>
+  <h1>
+    Hello, my name is {name}{name.length > 3 ? "!" : ""} and I'm {age} years old!
+  </h1>
   <input type="text" placeholder="Change name" on:input={handleNameChange} />
   <button on:click={incrementAge}>Increment age</button>
   <button on:click={decrementAge}>Decrement age</button>
