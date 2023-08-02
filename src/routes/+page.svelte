@@ -1,4 +1,5 @@
 <script>
+  import ContactCard from "../components/ContactCard.svelte";
   let name = "Gabo";
   let age = 48;
 
@@ -24,8 +25,12 @@
     Hello, my name is {name}{name.length > 3 ? "!" : ""} and I'm {age} years old!
   </h1>
   <input type="text" placeholder="Change name" on:input={handleNameChange} />
-  <button on:click={incrementAge}>Increment age</button>
-  <button on:click={decrementAge}>Decrement age</button>
+  <button type="button" on:click={incrementAge}>Increment age</button>
+  <button type="button" on:click={decrementAge}>Decrement age</button>
+
+  <section>
+    <ContactCard />
+  </section>
 </main>
 
 <style>
