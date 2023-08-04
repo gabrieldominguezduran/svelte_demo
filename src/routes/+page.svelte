@@ -2,6 +2,8 @@
   import ContactCard from "../components/ContactCard.svelte";
   let name = "Gabo";
   let age = 48;
+  let title = "";
+  let description = "";
 
   const capitalizeName = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
@@ -21,30 +23,35 @@
 </script>
 
 <main>
-  <h1>
-    Hello, my name is {name}{name.length > 3 ? "!" : ""} and I'm {age} years old!
-  </h1>
-  <input type="text" placeholder="Change name" on:input={handleNameChange} />
-  <button type="button" on:click={incrementAge}>Increment age</button>
-  <button type="button" on:click={decrementAge}>Decrement age</button>
-
-  <section>
-    <ContactCard />
+  <section class="buttons">
+    <h1>
+      Hello, my name is {name}{name.length > 3 ? "!" : ""} and I'm {age} years old!
+    </h1>
+    <input type="text" placeholder="Change name" on:input={handleNameChange} />
+    <input type="text" placeholder="Add Job title" bind:value={title} />
+    <input type="text" placeholder="Add description" bind:value={description} />
+    <button type="button" on:click={incrementAge}>Increment age</button>
+    <button type="button" on:click={decrementAge}>Decrement age</button>
+  </section>
+  <section class="contact-card">
+    <ContactCard userName={name} jobTitle={title} {description} />
   </section>
 </main>
 
 <style>
   main {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
     height: 95dvh;
     border: 5px solid crimson;
   }
+
+  .buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+  }
   h1 {
     color: crimson;
-    margin: 0 auto;
     text-align: center;
   }
 

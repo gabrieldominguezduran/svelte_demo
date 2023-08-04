@@ -1,33 +1,68 @@
-<div class="card">
+<script>
+  export let userName;
+  export let jobTitle;
+  export let description;
+</script>
+
+<div class="contact-card">
   <header>
-    <figure>
+    <div class="thumb">
       <img src="" alt="" />
-    </figure>
-    <h1>User name</h1>
-    <h2>Job Title</h2>
+    </div>
+    <div class="user-data">
+      <h1>{userName}</h1>
+      <h2>{jobTitle}</h2>
+    </div>
   </header>
-  <div>
-    <p>A short descritpion</p>
+  <div class="description">
+    <p>{description}</p>
   </div>
 </div>
 
 <style>
-  .card {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    transition: 0.3s;
+  .contact-card {
+    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.26);
     max-width: 30rem;
     border-radius: 5px;
     margin: 1rem 0;
-  }
-
-  .card:hover {
-    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
   }
 
   header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 7rem;
+  }
+
+  .thumb {
+    width: 33%;
+    height: 100%;
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .user-data {
+    width: 67%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  h1 {
+    font-size: 1.25rem;
+    font-family: "Roboto Slab", sans-serif;
+  }
+  h2 {
+    font-size: 1rem;
+    font-weight: normal;
+    color: #5a5a5a;
+  }
+
+  .description {
+    border-top: 1px solid #ccc;
+    padding: 1rem;
   }
 </style>
