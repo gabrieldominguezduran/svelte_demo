@@ -1,5 +1,4 @@
 <script>
-  import ContactCard from "../components/ContactCard.svelte";
   let name = "Gabo";
   let age = 48;
   let title = "";
@@ -33,9 +32,7 @@
     <button type="button" on:click={incrementAge}>Increment age</button>
     <button type="button" on:click={decrementAge}>Decrement age</button>
   </section>
-  <section class="contact-card">
-    <ContactCard userName={name} jobTitle={title} {description} />
-  </section>
+  <section class="contact-card" />
 </main>
 
 <style>
