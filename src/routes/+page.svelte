@@ -1,4 +1,5 @@
 <script>
+  import { flip } from "svelte/animate";
   import { emoji } from "./emojis";
 
   let state = "start";
@@ -8,7 +9,7 @@
   let selected = [];
   let matches = [];
   let timerId = null;
-  let time = 20;
+  let time = 60;
 
   function startGameTimer() {
     function countdown() {
@@ -53,7 +54,7 @@
     selected = [];
     matches = [];
     timerId = null;
-    time = 20;
+    time = 60;
   }
   function gameWon() {
     state = "won";
@@ -64,6 +65,20 @@
     resetGame();
   }
 
+  function pauseGame(e) {
+    if (e.key === "Escape") {
+      console.log("CLick");
+      switch (state) {
+        case "playing":
+          state = "paused";
+          break;
+        case "paused":
+          state = "playing";
+          break;
+      }
+    }
+  }
+
   $: if (state === "playing") {
     !timerId && startGameTimer();
   }
@@ -72,6 +87,16 @@
   $: maxMatches === matches.length && gameWon();
   $: time === 0 && gameLost();
 </script>
+
+<svelte:window on:keydown={pauseGame} />
+
+{#if state === "paused"}
+  <div class="paused">
+    <h1>Game paused</h1>
+    <button on:click={() => (state = "playing")}>Resume</button>
+    <h5>Or press Esc again 😉</h5>
+  </div>
+{/if}
 
 {#if state === "start"}
   <h1>Matching game</h1>
@@ -97,13 +122,15 @@
       <button
         class="card"
         class:selected={isSelected}
+        class:flip={isSelectedOrMatch}
         disabled={isSelectedOrMatch}
         on:click={() => selectCard(cardIndex)}
       >
-        <div class:match>{card}</div>
+        <div class="back" class:match>{card}</div>
       </button>
     {/each}
   </div>
+  <h4>Press Esc to pause the game</h4>
 {/if}
 
 {#if state === "lost"}
@@ -117,6 +144,15 @@
 {/if}
 
 <style>
+  .paused {
+    display: grid;
+    place-content: center;
+    text-align: center;
+
+    & h5 {
+      margin-top: 1rem;
+    }
+  }
   .cards {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
@@ -128,9 +164,25 @@
     width: 140px;
     font-size: 4rem;
     background-color: var(--bg-2);
+    transition: rotate 0.3s ease-out;
+    transform-style: preserve-3d;
 
     &.selected {
       border: 4px solid var(--border);
+    }
+
+    &.flip {
+      rotate: y 180deg;
+      pointer-events: none;
+    }
+
+    & .back {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-content: center;
+      backface-visibility: hidden;
+      rotate: y 180deg;
     }
 
     & .match {
