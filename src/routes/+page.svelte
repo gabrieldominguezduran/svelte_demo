@@ -1,5 +1,4 @@
 <script>
-  import { flip } from "svelte/animate";
   import { emoji } from "./emojis";
 
   let state = "start";
