@@ -66,7 +66,6 @@
 
   function pauseGame(e) {
     if (e.key === "Escape") {
-      console.log("CLick");
       switch (state) {
         case "playing":
           state = "paused";
